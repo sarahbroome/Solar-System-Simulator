@@ -1,3 +1,1 @@
 # Solar-System-Simulator
-
-jajaja

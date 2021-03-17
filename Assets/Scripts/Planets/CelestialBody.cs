@@ -6,10 +6,13 @@ using UnityEngine;
 public class CelestialBody : GravityObject {
 
     public float radius;
-    public float surfaceGravity;
+    public float surfaceGravity = 0f;
     public Vector3 initialVelocity;
     public string bodyName = "Unnamed";
     Transform meshHolder;
+
+    public string type = "Star";
+    public Rigidbody host_rb;
 
     public Vector3 velocity { get; private set; }
     public float mass { get; private set; }
@@ -22,14 +25,12 @@ public class CelestialBody : GravityObject {
     }
 
     public void UpdateVelocity (CelestialBody[] allBodies, float timeStep) {
-        foreach (var otherBody in allBodies) {
-            if (otherBody != this) {
-                float sqrDst = (otherBody.rb.position - rb.position).sqrMagnitude;
-                Vector3 forceDir = (otherBody.rb.position - rb.position).normalized;
+        if (this.type == "Planet" || this.type == "Moon") {
+            float sqrDst = (host_rb.position - rb.position).sqrMagnitude;
+                Vector3 forceDir = (host_rb.position - rb.position).normalized;
 
-                Vector3 acceleration = forceDir * Universe.gravitationalConstant * otherBody.mass / sqrDst;
+                Vector3 acceleration = forceDir * Universe.gravitationalConstant * host_rb.mass / sqrDst;
                 velocity += acceleration * timeStep;
-            }
         }
     }
 

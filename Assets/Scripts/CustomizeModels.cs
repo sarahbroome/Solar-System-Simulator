@@ -5,7 +5,7 @@ using UnityEngine;
 public class CustomizeModels : MonoBehaviour
 {
     public GameObject[] sizes;
-    private int currentSize;
+    public static int currentSize;
 
     void Update()
     {

@@ -5,10 +5,26 @@ using UnityEngine;
 public class CustomizeColor : MonoBehaviour
 {
     public Color[] colors;
-    public Material planetMat;
+    public Material planetMatsmall;
+    public Material planetMatmedium;
+    public Material planetMatlarge;
 
     public void ChangePlanetColor (int colorIndex)
     {
-        planetMat.color = colors[colorIndex];
+        if (CustomizeModels.currentSize == 0)
+        {
+            planetMatsmall.color = colors[colorIndex];
+        }
+
+        if (CustomizeModels.currentSize == 1)
+        {
+            planetMatmedium.color = colors[colorIndex];
+        }
+
+        if (CustomizeModels.currentSize == 2)
+        {
+            planetMatlarge.color = colors[colorIndex];
+        }
+
     }
 }
